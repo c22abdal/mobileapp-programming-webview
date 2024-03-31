@@ -1,6 +1,8 @@
 package com.example.webviewapp;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.text.Html;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -22,19 +24,19 @@ public class MainActivity extends AppCompatActivity {
 
     public void showInternalWebPage(){
         // TODO: Add your code for showing internal web page here
+        myWebView.loadUrl("file:///android_asset/about.html");
     }
 
+    @SuppressLint("SetJavaScriptEnabled")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
         myWebView = findViewById(R.id.webview);
         myWebView.setWebViewClient(new WebViewClient()); // Do not open in Chrome!
-        //showExternalWebPage();
-        //myWebView.loadUrl("https://his.se");
+        myWebView.getSettings().setJavaScriptEnabled(true);
         /*
         * Rename your App. Tip: Values->Strings
         * Enable Internet access for your App. Tip: Manifest
@@ -84,6 +86,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (id == R.id.action_internal_web) {
             Log.d("==>","Will display internal web page");
+            showInternalWebPage();
             return true;
         }
 
